@@ -1,13 +1,13 @@
-# Webpack React Setup
+# AYP Employee Management System Set up
 
 ## Install
 
 To install the dependencies
 ```
-$ npm i
+$ Yarn install
 ```
 
 To run the application
 ```
-$ npm start
+$ Yarn start
 ```
