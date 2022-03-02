@@ -8,7 +8,7 @@ const reducer = (
   action: EmployeeAction
 ): AppState => {
   switch (action.type) {
-    case actionTypes.UPDATE_EMPLOYEE:
+    case actionTypes.UPDATE_EMPLOYEE: 
       return {
         ...state,
         employees: state.employees.map(employee => employee.id === action.employee.id ? {...employee, ...action.employee} : employee),

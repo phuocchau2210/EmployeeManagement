@@ -36,18 +36,22 @@ const PopupComponent = (props: IPopupProps) => {
 
   const onChangeName = (e: any) => {
     const name = e.target.value;
-    setCurrentUpdateEmployeeData({...currentUpdateEmployeeData, name});
-  }
+    setCurrentUpdateEmployeeData({ ...currentUpdateEmployeeData, name });
+  };
 
   const onChangeEmail = (e: any) => {
     const email = e.target.value;
-    setCurrentUpdateEmployeeData({...currentUpdateEmployeeData, email});
-  }
+    setCurrentUpdateEmployeeData({ ...currentUpdateEmployeeData, email });
+  };
 
   const onChangeStatus = (e: any) => {
-    const status = !e.target.value;
-    setCurrentUpdateEmployeeData({...currentUpdateEmployeeData, isActive: status});
-  }
+    const status = e.target.checked;
+    console.log(status)
+    setCurrentUpdateEmployeeData({
+      ...currentUpdateEmployeeData,
+      isActive: status,
+    });
+  };
 
   return (
     <>
@@ -94,7 +98,7 @@ const PopupComponent = (props: IPopupProps) => {
                             id="inline-full-name"
                             type="text"
                             value={currentUpdateEmployeeData?.name}
-                            onChange={(e)=> onChangeName(e)}
+                            onChange={(e) => onChangeName(e)}
                           />
                         </div>
                       </div>

@@ -4,10 +4,12 @@ import { Dispatch } from "redux";
 import {
   toggleModal,
   toggleModalUpdateEmployee,
-  updateEmployee
+  updateEmployee,
 } from "../store/actionCreators";
 import { AppState, IEmployee } from "../store/interfaces";
 import PopupComponent from "./PopupComponent";
+import TableHeader from "./TableHeader";
+import TableDataRow from "./TableDataRow";
 
 export interface ITableEmployeeProps {
   employees: IEmployee[];
@@ -35,84 +37,101 @@ const TableEmployee = (props: ITableEmployeeProps) => {
     [dispatch]
   );
 
-
   return (
     <>
-    <table className="table-auto m-4">
-      <thead className="rounded-t-lg border-2">
-        <tr>
-          <th className="px-4 py-2">ID</th>
-          <th className="px-4 py-2">Name</th>
-          <th className="px-4 py-2">Email</th>
-          <th className="px-4 py-2">Status</th>
-          <th className="px-4 py-2">Action</th>
-        </tr>
-      </thead>
-      <tbody className="border-2">
-        {employees.map((employee) => (
-          <tr>
-            <td className="px-4 py-2 font-medium">#{employee.id}</td>
-            <td className="px-4 py-2">
-              <span className="flex flex-row">
-                <img
-                  className="mr-1"
-                  src="../src/assets/images/user.png"
-                  width="20"
-                  height="20"
-                />
-                {employee.name}
-              </span>
-            </td>
-            <td className="px-4 py-2">
-              <span className="flex flex-row">
-                <img
-                  className="mr-1"
-                  src="../src/assets/images/email.png"
-                  width="20"
-                  height="20"
-                />
-                {employee.email}
-              </span>
-            </td>
-            <td className="px-4 py-2">
-              <span className="flex flex-row font-medium">
-                {employee.isActive ? (
-                  <>
-                    <img
-                      className="mr-1"
-                      src="../src/assets/images/check.png"
-                      width="20"
-                      height="20"
-                    />
-                    ACTIVE
-                  </>
-                ) : (
-                  <>
-                    <img
-                      className="mr-1"
-                      src="../src/assets/images/uncheck.png"
-                      width="20"
-                      height="20"
-                    />
-                    DEACTIVE
-                  </>
-                )}
-              </span>
-            </td>
-            <td className="px-4 py-2">
-              {employee.isActive ? (
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => onClickUpdateButton(employee)}>
-                  Update
-                </button>
-              ) : (
-                ""
-              )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <PopupComponent actionLable="Save" onClickActionButton={updateEmployeeInformation} popupTitle="Update Employee Information"/>
+      <table className="table-fixed m-4 align-center">
+        <TableHeader
+          headerTitles={["ID", "Name", "Email", "Status", "Action"]}
+        />
+        <tbody className="border-2">
+          {employees.map((employee) => (
+            <TableDataRow
+            key={employee.id}
+              rowItems={[
+                { className: "font-medium", component: <>#{employee.id}</> },
+                {
+                  className: "",
+                  component: (
+                    <span className="flex flex-row">
+                      <img
+                        className="mr-1"
+                        src="../src/assets/images/user.png"
+                        width="20"
+                        height="20"
+                      />
+                      {employee.name}
+                    </span>
+                  ),
+                },
+                {
+                  className: "",
+                  component: (
+                    <span className="flex flex-row">
+                      <img
+                        className="mr-1"
+                        src="../src/assets/images/email.png"
+                        width="20"
+                        height="20"
+                      />
+                      {employee.email}
+                    </span>
+                  ),
+                },
+                {
+                  className: "",
+                  component: (
+                    <span className="flex flex-row font-medium">
+                      {employee.isActive ? (
+                        <>
+                          <img
+                            className="mr-1"
+                            src="../src/assets/images/check.png"
+                            width="20"
+                            height="20"
+                          />
+                          ACTIVE
+                        </>
+                      ) : (
+                        <>
+                          <img
+                            className="mr-1"
+                            src="../src/assets/images/uncheck.png"
+                            width="20"
+                            height="20"
+                          />
+                          DEACTIVE
+                        </>
+                      )}
+                    </span>
+                  ),
+                },
+                {
+                  className: "",
+                  component: (
+                    <>
+                      {employee.isActive ? (
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={() => onClickUpdateButton(employee)}
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  ),
+                },
+              ]}
+            />
+          ))}
+        </tbody>
+      </table>
+      <PopupComponent
+        actionLable="Save"
+        onClickActionButton={updateEmployeeInformation}
+        popupTitle="Update Employee Information"
+      />
     </>
   );
 };
