@@ -7,11 +7,13 @@ export interface IEmployee {
 
 export type AppState = {
   employees: IEmployee [];
+  isOpenModal: boolean;
+  currentUpdateEmployee?: IEmployee;
 }
 
 export type EmployeeAction = {
-  type: string
-  employee: IEmployee
+  type: string;
+  employee: IEmployee;
 }
 
 export type DispatchType = (args: EmployeeAction) => EmployeeAction
