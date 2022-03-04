@@ -1,4 +1,4 @@
-# AYP Employee Management System Set up
+# Employee Management System Set up
 
 ## Install
 
